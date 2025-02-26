@@ -10,9 +10,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
     /* Extra styling for read-only numeric input (the custom decimal logic) */
-    input[readonly] {
-      cursor: text;
-    }
+    /* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
   </style>
 </head>
 <body class="bg-white text-gray-800 flex flex-col" style="min-height: 100vh;">
