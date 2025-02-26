@@ -170,8 +170,8 @@ input[type="number"] {
         <!-- Avatar (placeholder) -->
         
         <!-- Name / Handle -->
-        <h2 class="text-xl font-semibold text-gray-800">Amr Mostafa</h2>
-        <p class="text-sm text-gray-500">@amrmostafa</p>
+        <h2 class="text-xl font-semibold text-gray-800" id="displayUsername">Amr Mostafa</h2>
+        <p id="displayEmail" class="text-sm text-gray-500">user@example.com</p>
       </div>
     </div>
 
@@ -291,7 +291,7 @@ input[type="number"] {
     });
 
     function move(){
-      window.location.href = "./confirm.html";
+      window.location.href = `./confirm.html?email=${document.getElementById('displayEmail').innerText}&username=${document.getElementById('displayUsername').innerText}&amount=${document.getElementById('amountInput').value}`;
     }
 
     function updateAmount() {
@@ -328,7 +328,21 @@ input[type="number"] {
 
     if (toggleOpen)  toggleOpen.addEventListener('click', handleClick);
     if (toggleClose) toggleClose.addEventListener('click', handleClick);
-
+    
+    function getQueryParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const pairs = queryString.split("&");
+      for (const pair of pairs) {
+        if (pair === "") continue;
+        const [key, value] = pair.split("=");
+        params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+      }
+      return params;
+    }
+    const params = getQueryParams();
+      document.getElementById('displayEmail').innerText = params.email;
+      document.getElementById('displayUsername').innerText = params.username;
   </script>
 </body>
 </html>

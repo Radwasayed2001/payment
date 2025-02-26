@@ -160,8 +160,8 @@
         <!-- Avatar (placeholder) -->
         
         <!-- Name / Handle -->
-        <h2 class="text-xl font-semibold text-gray-800">Amr Mostafa</h2>
-        <p class="text-sm text-gray-500">@amrmostafa</p>
+        <h2 class="text-xl font-semibold text-gray-800" id="displayUsername">Amr Mostafa</h2>
+        <p class="text-sm text-gray-500" id="displayEmail">@amrmostafa</p>
       </div>
     </div>
 
@@ -214,11 +214,7 @@
       <!-- Shipping Address -->
       <div class="bg-gray-50 border rounded p-3 mb-4 text-left text-sm text-gray-600">
         <p class="font-semibold mb-1">Your shipping addresses</p>
-        <p>123 Example Street</p>
-        <p>Marrakesh, Morocco 40000</p>
-        <p class="mt-2 text-gray-400 text-xs">
-          You can change the address before finalizing this payment.
-        </p>
+        
       </div>
   
       <!-- Fees & Totals -->
@@ -328,7 +324,7 @@
       updateAmount();
     });
     function move(){
-      window.location.href = "./conf.html";
+      window.location.href = `./conf.html?email=${document.getElementById('displayEmail').innerText}&username=${document.getElementById('displayUsername').innerText}&amount=${document.getElementById('amountInput').value}`;
     }
     function updateAmount() {
       if (rawValue === "") {
@@ -364,7 +360,14 @@
 
     if (toggleOpen)  toggleOpen.addEventListener('click', handleClick);
     if (toggleClose) toggleClose.addEventListener('click', handleClick);
+    const params = new URLSearchParams(window.location.search);
+const username = params.get("username");
+const email = params.get("email");
+const amount = params.get("amount");
 
+document.getElementById('displayUsername').innerText = username;
+document.getElementById('displayEmail').innerText = email;
+document.getElementById('amountInput').value = amount;
   </script>
 </body>
 </html>
