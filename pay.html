@@ -2,126 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="src/output.css" />
-  <title>Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Review Payment</title>
+  <!-- Tailwind CSS (your compiled CSS) -->
+  <link rel="stylesheet" href="src/output.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
-    body {
-      background-color: #f5f7fa; /* Slight PayPal-like background */
+    /* Extra styling for read-only numeric input (the custom decimal logic) */
+    input[readonly] {
+      cursor: text;
     }
   </style>
 </head>
-<body>
-    <header
-    class="nav-dropdown flex shadow-[rgba(0,0,0,0.1)_-4px_9px_25px_-6px] py-4 px-4 sm:px-10 font-sans min-h-[75px] tracking-wide relative z-50 bg-white"
-  >
-    <div class="flex flex-wrap items-center gap-4 w-full">
-      <!-- Logo -->
-      <a href="javascript:void(0)">
-        <img
-          src="./images/logo.png"
-          alt="logo"
-          class="w-20 rounded-full"
-        />
-      </a>
+<body class="bg-white text-gray-800 flex flex-col" style="min-height: 100vh;">
 
-      <div
-        id="collapseMenu"
-        class="lg:ml-12 max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-40 max-lg:before:inset-0 max-lg:before:z-50"
-      >
-        <button
-          id="toggleClose"
-          class="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border"
+  <!-- Header -->
+  <header class="font-sans relative z-50">
+    <!-- Top Bar -->
+    <div class="bg-[#142c8e] text-white flex justify-center shadow-[rgba(0,0,0,0.1)_-4px_9px_25px_-6px] py-4 min-h-[75px] tracking-wide">
+      <div class="flex flex-wrap items-center justify-between w-[70%]">
+        <!-- Logo -->
+        <a href="javascript:void(0)">
+          <img src="./images/logo22.png" alt="logo" width="50" />
+        </a>
+
+        <!-- Collapsible Menu (for mobile) -->
+        <div
+          id="collapseMenu"
+          class="lg:ml-12 max-lg:hidden lg:!block
+                 max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-40
+                 max-lg:before:inset-0 max-lg:before:z-50"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-3.5 h-3.5 fill-[#000]"
-            viewBox="0 0 320.591 320.591"
+          <!-- Close Button (shows on mobile) -->
+          <button
+            id="toggleClose"
+            class="lg:hidden fixed top-2 right-4 z-[100]
+                   rounded-full bg-white w-9 h-9 flex items-center
+                   justify-center border"
           >
-            <path
-              d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-            ></path>
-            <path
-              d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-            ></path>
-          </svg>
-        </button>
-
-        <ul
-          class="lg:flex lg:gap-x-4 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50"
-        >
-          <li class="max-lg:border-b max-lg:pb-4 px-3 lg:hidden">
-            <a href="javascript:void(0)">
-              <img
-                src="https://readymadeui.com/readymadeui.svg"
-                alt="logo"
-                class="w-36"
-              />
-            </a>
-          </li>
-          <li class="max-lg:border-b max-lg:py-3 px-3 border-r-2">
-            <a
-              href="./index.html"
-              class="hover:text-[#00457C] text-[#00457C] block font-semibold text-base"
-              >Home</a
-            >
-          </li>
-          <li class="max-lg:border-b max-lg:py-3 px-3 border-r-2">
-            <a
-              href="javascript:void(0)"
-              class="hover:text-[#00457C] text-black block font-semibold text-base"
-              >How It Works / Services</a
-            >
-          </li>
-          <li class="max-lg:border-b max-lg:py-3 px-3 border-r-2">
-            <a
-              href="javascript:void(0)"
-              class="hover:text-[#00457C] text-black block font-semibold text-base"
-              >Features</a
-            >
-          </li>
-          <li class="max-lg:border-b max-lg:py-3 px-3 border-r-2">
-            <a
-              href="javascript:void(0)"
-              class="hover:text-[#00457C] text-black block font-semibold text-base"
-              >Pricing / Fees</a
-            >
-          </li>
-          <li class="max-lg:border-b max-lg:py-3 px-3 border-r-2">
-            <a
-              href="javascript:void(0)"
-              class="hover:text-[#00457C] text-black block font-semibold text-base"
-              >Business / Merchant Solutions</a
-            >
-          </li>
-          <li class="max-lg:border-b max-lg:py-3 px-3 border-r-2">
-            <a
-              href="javascript:void(0)"
-              class="hover:text-[#00457C] text-black block font-semibold text-base"
-              >Help / Support</a
-            >
-          </li>
-        </ul>
-      </div>
-
-      <div class="flex ml-auto">
-        <button
-          class="px-4 py-2 text-sm rounded-md font-semibold text-white border-2 border-[#00457C] bg-[#00457C] hover:bg-[#003B65]"
-        >
-          Sign up
-        </button>
-
-        <div id="toggleOpen" class="flex ml-auto lg:hidden">
-          <button class="ml-4">
             <svg
-              class="w-7 h-7"
-              fill="#000"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-3.5 h-3.5 fill-[#000]"
+              viewBox="0 0 320.591 320.591"
+            >
+              <path
+                d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 
+                   0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 
+                   10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+              ></path>
+              <path
+                d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225
+                   -.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813
+                   c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414
+                   a30.368 30.368 0 0 1-23.078 7.288z"
+              ></path>
+            </svg>
+          </button>
+
+          <!-- Main Nav Items -->
+          <ul
+            class="lg:flex max-lg:space-y-4
+                   max-lg:fixed bg-[#142c8e] max-lg:w-2/3
+                   max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0
+                   max-lg:p-4 max-lg:h-full max-lg:shadow-md
+                   max-lg:overflow-auto z-50 text-white"
+          >
+            <!-- Mobile logo (hidden on desktop) -->
+            <li class="lg:hidden">
+              <a href="javascript:void(0)">
+                <img src="./images/logo22.png" alt="logo" class="w-36" />
+              </a>
+            </li>
+            <!-- Nav Items -->
+            <li class="my-[5px] py-4 bg-[#142c8e] rounded-full border border-transparent transition-all duration-300 ease-in-out hover:border-[#d1f1ff1a]">
+              <a href="javascript:void(0)" class="block font-semibold text-[#d1f1ff] px-4">
+                Home
+              </a>
+            </li>
+            <li class="my-[5px] flex py-4 border-[#142c8e] rounded-full border bg-[#d1f1ff1a] transition-all duration-300 ease-in-out">
+              <a href="javascript:void(0)" class="block font-semibold text-[#fff] px-4">
+                Send
+              </a>
+            </li>
+            <li class="my-[5px] py-4 bg-[#142c8e] rounded-full border border-transparent transition-all duration-300 ease-in-out hover:border-[#d1f1ff1a]">
+              <a href="javascript:void(0)" class="block font-semibold text-[#d1f1ff] px-4">
+                Wallet
+              </a>
+            </li>
+            <li class="my-[5px] py-4 bg-[#142c8e] rounded-full border border-transparent transition-all duration-300 ease-in-out hover:border-[#d1f1ff1a]">
+              <a href="javascript:void(0)" class="block font-semibold text-[#d1f1ff] px-4">
+                Activity
+              </a>
+            </li>
+            <li class="my-[5px] py-4 bg-[#142c8e] rounded-full border border-transparent transition-all duration-300 ease-in-out hover:border-[#d1f1ff1a]">
+              <a href="javascript:void(0)" class="block font-semibold text-[#d1f1ff] px-4">
+                Help
+              </a>
+            </li>
+            <li class="my-[5px] py-4 bg-[#142c8e] rounded-full border border-transparent transition-all duration-300 ease-in-out hover:border-[#d1f1ff1a]">
+              <a href="javascript:void(0)" class="block font-semibold text-[#d1f1ff] px-4">
+                More
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right side (desktop only) -->
+        <div class="hidden lg:flex ml-auto items-center gap-4">
+          <button>
+            <i class="fa-solid fa-bell text-[#d1f1ff]"></i>
+          </button>
+          <button>
+            <i class="fa-solid fa-gear text-[#d1f1ff]"></i>
+          </button>
+          <a href="javascript:void(0)" class="hover:underline font-semibold text-[#d1f1ff]">
+            LOG OUT
+          </a>
+        </div>
+
+        <!-- Mobile Menu Open Button -->
+        <div id="toggleOpen" class="flex ml-auto lg:hidden bg-[#142c8e]">
+          <button>
+            <svg
+              class="w-7 h-7 text-white"
+              fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 fill-rule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                d="M3 5a1 1 0 011-1h12a1 1 0
+                   110 2H4a1 1 0 01-1-1zM3 10a1 1 0
+                   011-1h12a1 1 0 110 2H4a1 1 0
+                   01-1-1zM3 15a1 1 0 011-1h12a1
+                   1 0 110 2H4a1 1 0 01-1-1z"
                 clip-rule="evenodd"
               ></path>
             </svg>
@@ -129,127 +144,182 @@
         </div>
       </div>
     </div>
+
+    <!-- SUB NAV BAR -->
+    
   </header>
-  <!-- MAIN CONTENT -->
-  <main class="max-w-3xl mx-auto mt-8 p-4 sm:p-2 lg:p-8">
-    <!-- Wrap inputs in a form with action pointing to the confirmation page -->
-    <form action="confirm.html" method="GET" class="bg-white rounded-md shadow-md p-2 sm:p-8">
-      <!-- Hidden field for recipient email (populated via JS) -->
-      <input type="hidden" name="receiverEmail" id="hiddenReceiverEmail" />
-      
-      <!-- Icon or avatar (optional) -->
-      <div class="flex justify-center mb-4 p-4">
-        <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center">
-          <!-- Icon placeholder -->
-          <svg
-            class="w-10 h-10 text-gray-500"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2c0 .7.5 1.2 1.2 1.2h16.8c.7 0 1.2-.5 1.2-1.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z"/>
-          </svg>
-        </div>
+
+  <!-- Main Content (No subnav) -->
+  <main class="flex-1 flex flex-col items-center justify-center px-4 py-8 bg-white">
+    <!-- Payment Card -->
+    <div class="w-full max-w-md bg-white border rounded-md shadow-sm p-6 text-center ">
+      <div class="flex justify-center h-24 " style="align-items: center;">
+      <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mb-2 me-4">
+        <i class="fa-solid fa-user text-gray-400 text-3xl"></i>
       </div>
+      <div class="flex flex-col items-start mb-4">
+        <!-- Avatar (placeholder) -->
+        
+        <!-- Name / Handle -->
+        <h2 class="text-xl font-semibold text-gray-800">Amr Mostafa</h2>
+        <p class="text-sm text-gray-500">@amrmostafa</p>
+      </div>
+    </div>
 
-      <!-- Title or info about sending money -->
-      <div class="text-center mb-6">
-        <p class="text-gray-700">
-          You're sending to 
-          <strong id="recipientEmail" class="text-[#00457C] text-sm"></strong>
-        </p>
-
-        <!-- Displayed amount with live updates -->
-        <p id="paymentAmount" class="text-3xl font-semibold mt-3"></p>
-        <div class="mt-3">
-          <label for="sendAmount" class="block text-gray-700 font-semibold mb-2">
-            Amount (USD)
-          </label>
+      <!-- Amount with custom decimal logic -->
+      
+      <div class="flex flex-row justify-between my-4">
+        <div class="mb-4">
           <input
-            type="number"
-            id="sendAmount"
-            name="sendAmount"
-            step="0.01"
-            placeholder="100.00"
-            class="border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#00457C] text-center w-48"
+            type="text"
+            id="amountInput"
+            
+            class="text-3xl font-bold w-full focus:outline-none bg-transparent"
+            value="00.00"
           />
         </div>
+        <!-- Currency Dropdown -->
+        <select class="border border-gray-300 rounded-full px-3 py-2 text-sm focus:outline-none focus:border-blue-600">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="EGP">EGP</option>
+          <!-- Add more currencies if needed -->
+        </select>
       </div>
+      <!-- Reason for Payment -->
+      <input
+        type="text"
+        placeholder="Reason for payment?"
+        class="border border-gray-300 rounded w-full py-6 px-3 focus:outline-none focus:border-blue-600 mb-4"
+      />
 
-      <!-- Shipping address input -->
-      <div class="mb-6 p-4">
-        <label for="shippingAddress" class="block text-gray-700 font-semibold mb-2">
-          Your shipping address
-        </label>
-        <input
-          type="text"
-          id="shippingAddress"
-          name="shippingAddress"
-          placeholder="Enter your address here"
-          class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#00457C]"
-        />
-      </div>
+      <!-- Terms text -->
+      
+    </div>
+    <p class="text-xs text-gray-400 mb-6 text-center mt-4">
+      For your security, we may review this payment.
+      <br/>
+      <a href="#" class="text-blue-600 hover:underline">Terms and Conditions</a>
+    </p>
 
-      <!-- Action buttons -->
-      <div class="flex flex-col sm:flex-row sm:justify-center gap-4">
-        <button
-          type="submit"
-          class="bg-[#00457C] hover:bg-[#003B65] text-white font-semibold px-6 py-2 rounded-md shadow-sm border-2 border-[#00457C]"
-        >
-          Continue
-        </button>
-        <button
-          type="button"
-          onclick="window.history.back()"
-          class="text-[#00457C] hover:underline font-semibold px-6 py-2 rounded-md"
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+    <!-- Buttons -->
+    <div>
+      <button onclick="move()" class="my-2 bg-black w-64 sm:w-96 text-white font-semibold px-6 py-2 rounded hover:bg-gray-900">
+        Send
+      </button>
+    </div>
+    <a href="index.html" class="text-md text-blue-600 underline font-semibold">
+      Cancel
+    </a>
+  </div>
   </main>
 
-  <!-- SCRIPT: Read URL params, live update amount, and set hidden email field -->
+  <!-- Footer -->
+  <footer class="mt-8 bg-white border-t">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-sm text-gray-600">
+      <!-- Top row: Logo on the left, links on the right -->
+      <div class="bg-white border-b py-3 px-4">
+        <div class="flex flex-col md:flex-row items-center justify-start max-w-7xl mx-auto">
+          <!-- Logo -->
+          <div>
+            <img
+              src="./images/logo.png"
+              alt="My Logo"
+              class="h-10"
+            />
+          </div>
+      
+          <!-- Nav Links -->
+          <nav class="flex gap-4 mx-4 mt-2 md:mt-0 text-sm text-gray-600">
+            <a href="javascript:void(0)" class="hover:underline text-lg font-bold">Help</a>
+            <a href="javascript:void(0)" class="hover:underline text-lg font-bold">Contact Us</a>
+            <a href="javascript:void(0)" class="hover:underline text-lg font-bold">Security</a>
+          </nav>
+        </div>
+      </div>
+      
+  
+      <!-- Disclaimers -->
+      <div class="text-gray-500 mt-4 text-md">
+        <p class="text-md font-semibold">
+          © 1999–2025 PayPal. All rights reserved.
+          <a href="#" class="hover:underline font-normal text-black">Privacy</a>
+          <span class="mx-1">|</span>
+          <a href="#" class="hover:underline font-normal text-black">Cookies</a>
+          <span class="mx-1">|</span>
+          <a href="#" class="hover:underline font-normal text-black">Legal</a>
+        </p>
+        <p class="text-md font-semibold mt-4">
+          PayPal Pte. Ltd. is licensed by the Monetary Authority of Singapore as a Major
+          Payment Institution under the Payment Services Act 2019.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for custom decimal logic -->
   <script>
-    // 1) Read URL params for recipientEmail from previous page
-    const urlParams = new URLSearchParams(window.location.search);
-    const receiverEmail = urlParams.get('receiverEmail') || 'info@freightforwardingquoteonline.com.au';
-    
-    // Insert the email into the visible element and into a hidden field for form submission
-    document.getElementById('recipientEmail').textContent = receiverEmail;
-    document.getElementById('hiddenReceiverEmail').value = receiverEmail;
+    // The user wants "00.00" -> press '1' => "00.01", press '3' => "00.13", etc.
+    let rawValue = "";
+    const amountInput = document.getElementById("amountInput");
 
-    // 2) Live update the displayed amount
-    const amountInput = document.getElementById('sendAmount');
-    const paymentAmountDisplay = document.getElementById('paymentAmount');
-
-    // Set an initial default in the input and display
-    amountInput.value = '100.00';
-    paymentAmountDisplay.innerHTML = '100.00 <span class="text-lg font-normal">USD</span>';
-
-    // Listen for input changes and update the displayed amount
-    amountInput.addEventListener('keyup', function () {
-      const val = this.value || '0.00';
-      paymentAmountDisplay.innerHTML = val + ' <span class="text-lg font-normal">USD</span>';
+    // Listen for keydown on the entire window (or you can attach to the input)
+    document.getElementById("amountInput").addEventListener("keydown", (e) => {
+      // If the user is typing digits or backspace, handle it:
+      if (e.key === "Backspace") {
+        // Remove last digit
+        rawValue = rawValue.slice(0, -1);
+        e.preventDefault();
+      } else if (/^\d$/.test(e.key)) {
+        // Append digit
+        rawValue += e.key;
+        e.preventDefault();
+      } else {
+        // Ignore all other keys
+        return;
+      }
+      updateAmount();
     });
-    amountInput.addEventListener('input', function () {
-      const val = this.value || '0.00';
-      paymentAmountDisplay.innerHTML = val + ' <span class="text-lg font-normal">USD</span>';
-    });
+
+    function move(){
+      window.location.href = "./confirm.html";
+    }
+
+    function updateAmount() {
+      if (rawValue === "") {
+        amountInput.value = "00.00";
+        return;
+      }
+      // Convert rawValue to integer
+      let intVal = parseInt(rawValue, 10);
+      // decimal = intVal / 100 => last two digits are decimal part
+      let decimal = intVal / 100;
+      // Format with at least 2 decimals
+      let formatted = decimal.toFixed(2);
+      // The user wants leading zeros so that if it's < 1, it shows 00.xx
+      if (decimal < 10) {
+        formatted =  formatted; // ensures at least one leading zero
+      }
+      if (decimal < 1) {
+        formatted = "0" + formatted; // ensures two leading zeros if < 1
+      }
+      amountInput.value = formatted;
+    }
     var toggleOpen = document.getElementById('toggleOpen');
-var toggleClose = document.getElementById('toggleClose');
-var collapseMenu = document.getElementById('collapseMenu');
+    var toggleClose = document.getElementById('toggleClose');
+    var collapseMenu = document.getElementById('collapseMenu');
 
-function handleClick() {
-  if (collapseMenu.style.display === 'block') {
-    collapseMenu.style.display = 'none';
-  } else {
-    collapseMenu.style.display = 'block';
-  }
-}
+    function handleClick() {
+      if (collapseMenu.style.display === 'block') {
+        collapseMenu.style.display = 'none';
+      } else {
+        collapseMenu.style.display = 'block';
+      }
+    }
 
-toggleOpen.addEventListener('click', handleClick);
-toggleClose.addEventListener('click', handleClick);
+    if (toggleOpen)  toggleOpen.addEventListener('click', handleClick);
+    if (toggleClose) toggleClose.addEventListener('click', handleClick);
+
   </script>
 </body>
 </html>
