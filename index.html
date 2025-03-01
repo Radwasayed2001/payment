@@ -153,7 +153,7 @@
         <h2 class="text-lg font-semibold mb-2">PayPal Balance</h2>
         <div class="flex items-center justify-between mb-4">
           <div>
-            <p class="text-2xl font-bold">832 409 706,84 €</p>
+            <p class="text-2xl font-bold"><span id="balance">832409706.84</span> €</p>
             <p class="text-sm text-gray-500">Available</p>
           </div>
           <button
@@ -316,6 +316,20 @@
     function move(){
       window.location.href = "./info.html";
     }
+    document.addEventListener("DOMContentLoaded", () => {
+      const balanceElement = document.getElementById('balance');
+      // Try to retrieve the stored balance from localStorage
+      let storedBalance = localStorage.getItem("paypalBalance");
+      
+      if (storedBalance) {
+        // If exists, update the element
+        balanceElement.innerText = storedBalance;
+      } else {
+        // Otherwise, store the current content as default
+        storedBalance = balanceElement.innerText.trim();
+        localStorage.setItem("paypalBalance", storedBalance*1);
+      }
+    });
   </script>
 </body>
 </html>

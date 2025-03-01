@@ -12,6 +12,8 @@
   <link rel="canonical" href="https://www.paypal.com/eg/signin">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <style>
     /* Extra styling for read-only numeric input (the custom decimal logic) */
     input[readonly] {
@@ -327,8 +329,28 @@
       }
       updateAmount();
     });
-    function move(){
-      window.location.href = `./conf.html?email=${document.getElementById('displayEmail').innerText}&username=${document.getElementById('displayUsername').innerText}&amount=${document.getElementById('amountInput').value}`;
+    function move() {
+      // Get the entered amount (remove any non-digit/decimal characters)
+      const amountValue = parseFloat(document.getElementById('amountInput').value.replace(/[^0-9.]/g, ''));
+      
+      // Retrieve stored balance from localStorage (assumed to be stored as a number in string format)
+      const storedBalanceStr = localStorage.getItem("paypalBalance") || "0";
+      const storedBalance = parseFloat(storedBalanceStr);
+      
+      if (amountValue <= storedBalance) {
+        // Subtract the amount from the stored balance
+        const newBalance = storedBalance - amountValue;
+        localStorage.setItem("paypalBalance", newBalance.toFixed(2));
+        // Redirect to confirm page with query parameters
+        window.location.href = `./conf.html?email=${encodeURIComponent(document.getElementById('displayEmail').innerText)}&username=${encodeURIComponent(document.getElementById('displayUsername').innerText)}&amount=${encodeURIComponent(document.getElementById('amountInput').value)}`;
+      } else {
+        // Show error using SweetAlert2
+        Swal.fire({
+          icon: 'error',
+          title: 'Insufficient Funds',
+          text: 'The entered amount exceeds your available balance.',
+        });
+      }
     }
     function updateAmount() {
       if (rawValue === "") {
