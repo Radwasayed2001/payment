@@ -156,7 +156,7 @@
             <p class="text-2xl font-bold"><span id="balance">832409706.84</span> €</p>
             <p class="text-sm text-gray-500">Available</p>
           </div>
-          <button
+          <button id="addMoney"
             class="px-4 py-2 bg-[#142c8e] text-white rounded hover:bg-blue-900"
           >
             Add money
@@ -325,10 +325,47 @@
         // If exists, update the element
         balanceElement.innerText = storedBalance;
       } else {
-        // Otherwise, store the current content as default
+        // Otherwise, store  current content as default
         storedBalance = balanceElement.innerText.trim();
         localStorage.setItem("paypalBalance", storedBalance*1);
       }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.getElementById("addMoney").addEventListener("click", function() {
+      Swal.fire({
+        title: 'Add Money',
+        input: 'number',
+        inputLabel: 'Enter amount to add',
+        inputPlaceholder: 'e.g. 100.00',
+        confirmButtonColor: '#142c8e', // Set the OK button background color
+        showCancelButton: true,
+        inputValidator: (value) => {
+          if (!value || isNaN(value) || parseFloat(value) <= 0) {
+            return 'Please enter a valid amount greater than 0!'
+          }
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Parse the entered amount
+          const addedAmount = parseFloat(result.value);
+          // Get the current balance from localStorage, default to 0 if not found
+          const currentBalance = parseFloat(localStorage.getItem("paypalBalance") || "0");
+          // Calculate new balance
+          const newBalance = currentBalance + addedAmount;
+          // Update localStorage with new balance (formatted to 2 decimals)
+          localStorage.setItem("paypalBalance", newBalance.toFixed(2));
+          // Display success alert
+          Swal.fire({
+            icon: 'success',
+            title: 'Money Added',
+            text: `Your new balance is ${newBalance.toFixed(2)}`,
+            
+          });
+          document.getElementById("balance").innerText = localStorage.getItem("paypalBalance");
+        }
+      });
     });
   </script>
 </body>
