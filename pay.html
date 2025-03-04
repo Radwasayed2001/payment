@@ -276,7 +276,7 @@ input[type="number"] {
     const amountInput = document.getElementById("amountInput");
 
     // Listen for keydown on the entire window (or you can attach to the input)
-    document.getElementById("amountInput").addEventListener("keyup", (e) => {
+    document.getElementById("amountInput").addEventListener("input", (e) => {
       // If the user is typing digits or backspace, handle it:
       if (e.key === "Backspace") {
         // Remove last digit
