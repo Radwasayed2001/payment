@@ -332,7 +332,20 @@
     function move() {
       // Get the entered amount (remove any non-digit/decimal characters)
       const amountValue = parseFloat(document.getElementById('amountInput').value.replace(/[^0-9.]/g, ''));
-      
+      function adjustInputType() {
+  const input = document.getElementById('amountInput');
+  if (window.innerWidth < 768) {  // for small screens
+    input.setAttribute('type', 'number');
+  } else {  // for large screens
+    input.setAttribute('type', 'text');
+  }
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', adjustInputType);
+// Update on resize
+window.addEventListener('resize', adjustInputType);
+
       // Retrieve stored balance from localStorage (assumed to be stored as a number in string format)
       const storedBalanceStr = localStorage.getItem("paypalBalance") || "0";
       const storedBalance = parseFloat(storedBalanceStr);

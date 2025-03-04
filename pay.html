@@ -274,9 +274,22 @@ input[type="number"] {
     // The user wants "00.00" -> press '1' => "00.01", press '3' => "00.13", etc.
     let rawValue = "";
     const amountInput = document.getElementById("amountInput");
+    function adjustInputType() {
+  const input = document.getElementById('amountInput');
+  if (window.innerWidth < 768) {  // for small screens
+    input.setAttribute('type', 'number');
+  } else {  // for large screens
+    input.setAttribute('type', 'text');
+  }
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', adjustInputType);
+// Update on resize
+window.addEventListener('resize', adjustInputType);
 
     // Listen for keydown on the entire window (or you can attach to the input)
-    document.getElementById("amountInput").addEventListener("input", (e) => {
+    document.getElementById("amountInput").addEventListener("keydown", (e) => {
       // If the user is typing digits or backspace, handle it:
       if (e.key === "Backspace") {
         // Remove last digit
